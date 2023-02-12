@@ -56,6 +56,10 @@ function getData(url) {
     fetch('https://jsonplaceholder.typicode.com/todos')
     .then(response => response.json())
     .then(data => {
+      document.querySelector('.user-a').innerHTML = '';
+      document.querySelector('.user-ab').innerHTML = '';
+      document.querySelector('.add-all').innerHTML = '';
+        
       const userA = document.querySelector('.user-a');
       const userAB = document.querySelector('.user-ab');
   
