@@ -57,7 +57,7 @@ function getData(url) {
     .then(response => response.json())
     .then(data => {
 
-      document.querySelector('.user-ab').innerHTML = '';
+      
       document.querySelector('.add-all').innerHTML = '';
         
       const userA = document.querySelector('.user-a');
@@ -82,17 +82,24 @@ function getData(url) {
   
       document.querySelector('.add-a').addEventListener('click', () => {
         showObjectsByLetter('a');
+        document.querySelector('.user-ab').innerHTML = '';
+        document.querySelector('.add-all').innerHTML = '';
       });
   
       document.querySelector('.add-ab').addEventListener('click', () => {
         showObjectsByLetter('ab');
         document.querySelector('.user-a').innerHTML = '';
+        document.querySelector('.add-all').innerHTML = '';
       });
   
   
       document.querySelector('.add-all').addEventListener('click', () => {
         const objectsStartingWithA = filterByLetter(data, 'a');
         const objectsStartingWithAB = filterByLetter(data, 'ab');
+
+        document.querySelector('.user-a').innerHTML = '';
+        document.querySelector('.user-b').innerHTML = '';
+       
         addObjectsToBlock(objectsStartingWithA, userA);
         addObjectsToBlock(objectsStartingWithAB, userAB);
       });
