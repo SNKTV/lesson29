@@ -56,7 +56,7 @@ function getData(url) {
     fetch('https://jsonplaceholder.typicode.com/todos')
     .then(response => response.json())
     .then(data => {
-      document.querySelector('.user-a').innerHTML = '';
+
       document.querySelector('.user-ab').innerHTML = '';
       document.querySelector('.add-all').innerHTML = '';
         
@@ -86,6 +86,7 @@ function getData(url) {
   
       document.querySelector('.add-ab').addEventListener('click', () => {
         showObjectsByLetter('ab');
+        document.querySelector('.user-a').innerHTML = '';
       });
   
   
