@@ -51,59 +51,51 @@ function getData(url) {
   
   // Завдання 4 
   
-  
   function getData() {
-    fetch('https://jsonplaceholder.typicode.com/todos')
+  fetch('https://jsonplaceholder.typicode.com/todos')
     .then(response => response.json())
     .then(data => {
 
-      
-      document.querySelector('.add-all').innerHTML = '';
-        
-      const userA = document.querySelector('.user-a');
-      const userAB = document.querySelector('.user-ab');
-  
-      const filterByLetter = (data, letter) => {
+      const USER_A_BLOCK = document.querySelector('.user-a');
+      const USER_AB_BLOCK = document.querySelector('.user-ab');
+
+      const FILTER_BY_LETTER = (data, letter) => {
         return data.filter(obj => obj.title.toLowerCase().startsWith(letter));
       };
   
-      const addObjectsToBlock = (objects, block) => {
+      const ADD_OBJECTS_TO_BLOCK = (objects, block) => {
         block.innerHTML = objects.map(obj => `<p>${JSON.stringify(obj)}</p>`).join('');
       };
   
       const showObjectsByLetter = letter => {
-        const filteredObjects = filterByLetter(data, letter);
+        const filteredObjects = FILTER_BY_LETTER(data, letter);
         if (letter === 'a') {
-          addObjectsToBlock(filteredObjects, userA);
+          ADD_OBJECTS_TO_BLOCK(filteredObjects, USER_A_BLOCK);
+          USER_AB_BLOCK.innerHTML = '';
         } else if (letter === 'ab') {
-          addObjectsToBlock(filteredObjects, userAB);
+          ADD_OBJECTS_TO_BLOCK(filteredObjects, USER_AB_BLOCK);
+          USER_A_BLOCK.innerHTML = '';
         }
       };
   
       document.querySelector('.add-a').addEventListener('click', () => {
         showObjectsByLetter('a');
-        document.querySelector('.user-ab').innerHTML = '';
         document.querySelector('.add-all').innerHTML = '';
       });
   
       document.querySelector('.add-ab').addEventListener('click', () => {
         showObjectsByLetter('ab');
-        document.querySelector('.user-a').innerHTML = '';
         document.querySelector('.add-all').innerHTML = '';
       });
   
-  
       document.querySelector('.add-all').addEventListener('click', () => {
-        const objectsStartingWithA = filterByLetter(data, 'a');
-        const objectsStartingWithAB = filterByLetter(data, 'ab');
-
-        document.querySelector('.user-a').innerHTML = '';
-        document.querySelector('.user-b').innerHTML = '';
-       
-        addObjectsToBlock(objectsStartingWithA, userA);
-        addObjectsToBlock(objectsStartingWithAB, userAB);
+        const objectsStartingWithA = FILTER_BY_LETTER(data, 'a');
+        const objectsStartingWithAB = FILTER_BY_LETTER(data, 'ab');
+  
+        ADD_OBJECTS_TO_BLOCK(objectsStartingWithA, USER_A_BLOCK);
+        ADD_OBJECTS_TO_BLOCK(objectsStartingWithAB, USER_AB_BLOCK);
       });
     });
-  }
-  
-  getData();
+}
+
+getData();
